@@ -17,7 +17,7 @@ function happybirthday() {
 }
 </script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" gallery="width=device-width, initial-scale=1">
 <style>
 * {
   box-sizing: border-box;
@@ -59,13 +59,13 @@ h1 {
 
 /* Clear floats after rows */ 
 .row:after {
-  content: "";
+  gallery: "";
   display: table;
   clear: both;
 }
 
-/* Content */
-.content {
+/* gallery */
+.gallery {
   background-color: white;
   padding: 10px;
 }
@@ -134,7 +134,7 @@ div.desc {
 }
 
 .clearfix:after {
-  content: "";
+  gallery: "";
   display: table;
   clear: both;
 }
@@ -148,10 +148,105 @@ div.desc {
   display: inline-block;
   font-size: 16px;
 }
+}
+h1{
+    color: #008CBA;
+    
+}
+.btn1{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    
+}
+.btn1:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+}
+
 </style>
 </style>
 </head>
 <body>
+<center><h1>Age Calculator</h1>
+		Date Of Birth: 
+		<input type="date" id="birth_date">
+		<input class="btn1" type="button" value="Calculate Age" onclick="ageCalculate()">
+        <br/><br/>
+        Age: 
+        <br/>
+        <br/>
+        <div id="age"></div>
+        
+<p id="agecalculator"></p></center>
+<script>
+function ageCalculate(){
+    //document.getElementById('age').InnerHtml
+  // document.getElementById("agecalculator").InnerHtml=4+5;
+   //document.write="Hi";
+   var birthDate =document.getElementById('birth_date').value;
+
+//if(birthDate==""){
+  //  alert("Choose correct birthdate.")
+//}else{
+  //  alert(birthDate);
+  //  alert(Date());
+    var d = new Date(birthDate);
+
+   // document.getElementById("age").innerHTML = d;
+
+//}
+
+        var mdate = birthDate.toString();
+        var yearThen = parseInt(mdate.substring(0,4), 10);
+        var monthThen = parseInt(mdate.substring(5,7), 10);
+        var dayThen = parseInt(mdate.substring(8,10), 10);
+        
+        var today = new Date();
+        var birthday = new Date(yearThen, monthThen-1, dayThen);
+     //   alert(today.valueOf() + " " + birthday.valueOf());
+        var differenceInMilisecond = today.valueOf() - birthday.valueOf();
+      //  alert(differenceInMilisecond);
+        
+        var year_age = Math.floor(differenceInMilisecond / 31536000000);
+        var day_age = Math.floor((differenceInMilisecond % 31536000000) / 86400000);
+        
+        if ((today.getMonth() == birthday.getMonth()) && (today.getDate() == birthday.getDate())) {
+            alert("Happy B'day!!!");
+        }
+        
+        var month_age = Math.floor(day_age/30);
+        
+        day_age = day_age % 30;
+        
+        var tMnt= (month_age + (year_age*12));
+        var tDays =(tMnt*30) + day_age;
+        
+        if (isNaN(year_age) || isNaN(month_age) || isNaN(day_age)) {
+            document.getElementById("age").innerHTML = ("Invalid birthday - Please try again!");
+        }
+        else {
+            document.getElementById("age").innerHTML = year_age + " years " + month_age + " months " + day_age + " days"
+            + "<br/> or <br/> " 
+            + tMnt + " months " + day_age + " days" 
+            + "<br/> or <br/>" 
+            +  tDays + " days" 
+            + "<br/> or <br/>" 
+            +  tDays*24 + " hours" 
+            + "<br/> or <br/>" 
+            +  tDays*24*3600 + " seconds" 
+            + "<br/> or <br/>" 
+            +  tDays*24*3600*1000 + " miliseconds" ;
+        }
+
+}
+</script>
 
 <!-- MAIN (Center website) -->
 <div class="main">
@@ -167,26 +262,28 @@ div.desc {
   <button class="btn" onclick="filterSelection('father')"> Fathers</button>
   <button class="btn" onclick="filterSelection('mother')"> Mothers</button>
   <button class="btn" onclick="filterSelection('children')"> Childrens</button>
+  <button class="btn" onclick="filterSelection('newwife')"> Z Generation Wife</button>
+  <button class="btn" onclick="filterSelection('responsive')"> Gallery<button>
 </div>
 
 <!-- Portfolio Gallery Grid -->
 <div class="row">
   <div class="column father">
-    <div class="content">
+    <div class="gallery">
       <img src="https://calcuttacastle.github.io/borojethu.jpg" alt="Mountains" style="width:100%">
       <h4>Panchu Gopal Banerjee</h4>
       <p>1st Brother of Brothers</p>
     </div>
   </div>
   <div class="column father">
-    <div class="content">
+    <div class="gallery">
     <img src="" alt="" style="width:100%">
       <h4>Tarak Nath Banerjee</h4>
       <p>2nd Brother of Brothers</p>
     </div>
   </div>
   <div class="column father">
-    <div class="content">
+    <div class="gallery">
     <img src="https://calcuttacastle.github.io/father.jpg" alt="Nature" style="width:100%">
       <h4>Tapas Banerjee</h4>
       <p>Last Brother of Brothers</p>
@@ -194,58 +291,64 @@ div.desc {
   </div>
 </div>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<div class="row">
   <div class="column mother">
-    <div class="content">
+    <div class="gallery">
       <img src="https://calcuttacastle.github.io/borojethi.jpg" alt="img" style="width:100%">
       <h4>Sandhya Banerjee</h4>
       <p>Wife of Panchu Gopal Banerjee</p>
     </div>
   </div>
   <div class="column mother">
-    <div class="content">
+    <div class="gallery">
     <img src="https://calcuttacastle.github.io/koyel.jpg" alt="img" style="width:100%">
       <h4>Koyel Banerjee</h4>
       <p>Wife of Tarak Banerjee</p>
     </div>
   </div>
   <div class="column mother">
-    <div class="content">
+    <div class="gallery">
     <img src="https://calcuttacastle.github.io/motherindia.jpg" alt="img" style="width:100%">
       <h4>Radha Banerjee</h4>
       <p>Wife of Tapas Banerjee</p>
     </div>
   </div>
+</div>  
+ <hr style="height:2px;border-width:0;color:gray;background-color:gray">
   <br>
+<div class="row">  
   <div class="column children">
-    <div class="content">
+    <div class="gallery">
       <img src="https://calcuttacastle.github.io/muna.jpg" alt="img" style="width:100%">
       <h4>Prasenjeet Banerjee</h4>
       <p>Children</p>
     </div>
   </div>
   <div class="column children">
-    <div class="content">
-    <img src="https://calcuttacastle.github.io/ishan.jpg" alt="img" style="height:350px">
+    <div class="gallery">
+    <img src="https://calcuttacastle.github.io/rittu.jpg" alt="img" style="width:100%">
       <h4>Ishan Banerjee</h4>
       <p>Children</p>
     </div>
   </div>
   <div class="column children">
-    <div class="content">
+    <div class="gallery">
     <img src="" alt="" style="width:100%">
       <h4>Sourav Banerjee</h4>
       <p>Children</p>
     </div>
 	<br>
+	</div>
 	<div class="column children">
-    <div class="content">
-    <img src="https://calcuttacastle.github.io/me.png" alt="" style="width:100%">
+    <div class="gallery">
+    <img src="https://calcuttacastle.github.io/me.png" alt=""  height="42" width="42">
       <h4>Indrajeet Banerjee</h4>
       <p>Children</p>
     </div>
+	</div>
 	<div class="column children">
-    <div class="content">
-    <img src="https://calcuttacastle.github.io/mommom.jpg" alt="img" style="height:350px">
+    <div class="gallery">
+    <img src="https://calcuttacastle.github.io/mommom.jpg" alt="img" style="width:100%">
       <h4>Sneha Banerjee</h4>
       <p>Children</p>
     </div>
@@ -255,10 +358,31 @@ div.desc {
 
 <!-- END MAIN -->
 </div>
+<div class="row">
+  <div class="column newwife">
+    <div class="gallery">
+      <img src="https://calcuttacastle.github.io/joytee.jpg" alt="Mountains" style="width:100%">
+      <h4>Joytee Banerjee</h4>
+      <p></p>
+    </div>
+  </div>
+  <div class="column newwife">
+    <div class="gallery">
+    <img src="https://calcuttacastle.github.io/dona.jpg" alt="" style="width:100%">
+      <h4>Satabdi Banerjee</h4>
+      <p></p>
+    </div>
+  </div>
+ 
+</div>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+
 <div class="responsive">
+<p><br>
+<h1>Gallery</h1></p>
   <div class="gallery">
     <a target="_blank" href="img_5terre.jpg">
-      <img src="https://calcuttacastle.github.io/" alt="" width="600" height="400">
+      <img src="https://calcuttacastle.github.io/family3.jpg" alt="" width="600" height="400">
     </a>
     <div class="desc">Add a description of the image here</div>
   </div>
@@ -268,7 +392,7 @@ div.desc {
 <div class="responsive">
   <div class="gallery">
     <a target="_blank" href="img_forest.jpg">
-      <img src="https://calcuttacastle.github.io/" alt="" width="600" height="400">
+      <img src="https://calcuttacastle.github.io/fatherindia.jpg" alt="" width="600" height="400">
     </a>
     <div class="desc">Add a description of the image here</div>
   </div>
@@ -277,7 +401,7 @@ div.desc {
 <div class="responsive">
   <div class="gallery">
     <a target="_blank" href="img_lights.jpg">
-      <img src="https://calcuttacastle.github.io/" alt="" width="600" height="400">
+      <img src="https://calcuttacastle.github.io/parentindia.jpg" alt="" width="600" height="400">
     </a>
     <div class="desc">Add a description of the image here</div>
   </div>
@@ -286,12 +410,29 @@ div.desc {
 <div class="responsive">
   <div class="gallery">
     <a target="_blank" href="img_mountains.jpg">
-      <img src="https://calcuttacastle.github.io/" alt="" width="600" height="400">
+      <img src="https://calcuttacastle.github.io/wife1.jpg" alt="" width="600" height="400">
     </a>
     <div class="desc">Add a description of the image here</div>
   </div>
 </div>
 
+<div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="img_mountains.jpg">
+      <img src="https://calcuttacastle.github.io/wife2.jpg" alt="" width="600" height="400">
+    </a>
+    <div class="desc">Add a description of the image here</div>
+  </div>
+</div>
+
+<div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="img_mountains.jpg">
+      <img src="https://calcuttacastle.github.io/koyelmommom.jpg" alt="" width="600" height="400">
+    </a>
+    <div class="desc">Add a description of the image here</div>
+  </div>
+</div>
 <div class="clearfix"></div>
 
 
